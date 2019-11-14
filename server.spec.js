@@ -51,14 +51,13 @@ describe("GET /cats endpoint", () => {
   });
 });
 
-// describe("catsModel", () => {
-//     describe("insert function", () => {
-//         test("inserts cat", () => {
-//             return Cats.insert({name: "newCat", hobby: "newHobby"})
-
-//         })
-//     })
-// })  This test works but adds newCat to the database each time - I need to research a workaround
+describe("catsModel", () => {
+  describe("insert function", () => {
+    test("inserts cat", () => {
+      return Cats.insert({ name: "newCat", hobby: "newHobby" });
+    });
+  });
+});
 
 describe("catsModel", () => {
   describe("findById function", () => {
