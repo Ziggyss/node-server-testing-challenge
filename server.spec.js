@@ -1,5 +1,7 @@
 const request = require("supertest");
 const server = require("./server");
+const Cats = require("./catsModel");
+const db = require("./data/db-config");
 
 describe("server", () => {
   describe("[GET] / endpoint", () => {
@@ -46,5 +48,38 @@ describe("GET /cats endpoint", () => {
         { id: 3, name: "Zuri", hobby: "pirating" },
         { id: 4, name: "Pusskins", hobby: "decapitating rabbits" }
       ]);
+  });
+});
+
+// describe("catsModel", () => {
+//     describe("insert function", () => {
+//         test("inserts cat", () => {
+//             return Cats.insert({name: "newCat", hobby: "newHobby"})
+
+//         })
+//     })
+// })  This test works but adds newCat to the database each time - I need to research a workaround
+
+describe("catsModel", () => {
+  describe("findById function", () => {
+    test("returns the first cat", () => {
+      return request(server)
+        .get("/cats/1")
+        .expect(200)
+        .expect({ id: 1, name: "Ziggy", hobby: "eating flies" });
+    });
+  });
+});
+
+describe("DELETE /cats/5 endpoint", () => {
+  describe("deletes a cat", () => {
+    test("returns success message", () => {
+      return request(server)
+        .delete("/cats/5")
+        .expect(200)
+        .expect({
+          message: "Cat deleted successfully"
+        });
+    });
   });
 });
